@@ -20,7 +20,7 @@
           "raw": "{\n  \"currency\": \"USD\"\n}"
         },
         "url": {
-          "raw": "http://localhost:3000/wallets",
+          "raw": "{{baseUrl}}/wallets",
           "protocol": "http",
           "host": ["localhost"],
           "port": "3000",
@@ -45,7 +45,7 @@
           "raw": "{\n  \"amount\": 100.50\n}"
         },
         "url": {
-          "raw": "http://localhost:3000/wallets/{{walletId}}/fund",
+          "raw": "{{baseUrl}}/wallets/{{walletId}}/fund",
           "protocol": "http",
           "host": ["localhost"],
           "port": "3000",
@@ -70,7 +70,7 @@
           "raw": "{\n  \"amount\": 200.00,\n  \"idempotencyKey\": \"fund-operation-123\"\n}"
         },
         "url": {
-          "raw": "http://localhost:3000/wallets/{{walletId}}/fund",
+          "raw": "{{baseUrl}}/wallets/{{walletId}}/fund",
           "protocol": "http",
           "host": ["localhost"],
           "port": "3000",
@@ -95,7 +95,7 @@
           "raw": "{\n  \"fromWalletId\": \"{{senderWalletId}}\",\n  \"toWalletId\": \"{{receiverWalletId}}\",\n  \"amount\": 50.00\n}"
         },
         "url": {
-          "raw": "http://localhost:3000/wallets/transfer",
+          "raw": "{{baseUrl}}/wallets/transfer",
           "protocol": "http",
           "host": ["localhost"],
           "port": "3000",
@@ -120,7 +120,7 @@
           "raw": "{\n  \"fromWalletId\": \"{{senderWalletId}}\",\n  \"toWalletId\": \"{{receiverWalletId}}\",\n  \"amount\": 25.00,\n  \"idempotencyKey\": \"transfer-operation-456\"\n}"
         },
         "url": {
-          "raw": "http://localhost:3000/wallets/transfer",
+          "raw": "{{baseUrl}}/wallets/transfer",
           "protocol": "http",
           "host": ["localhost"],
           "port": "3000",
@@ -136,7 +136,7 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:3000/wallets/{{walletId}}",
+          "raw": "{{baseUrl}}/wallets/{{walletId}}",
           "protocol": "http",
           "host": ["localhost"],
           "port": "3000",
@@ -152,7 +152,7 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:3000/wallets",
+          "raw": "{{baseUrl}}/wallets",
           "protocol": "http",
           "host": ["localhost"],
           "port": "3000",
@@ -177,7 +177,7 @@
           "raw": "{\n  \"amount\": -50\n}"
         },
         "url": {
-          "raw": "http://localhost:3000/wallets/{{walletId}}/fund",
+          "raw": "{{baseUrl}}/wallets/{{walletId}}/fund",
           "protocol": "http",
           "host": ["localhost"],
           "port": "3000",
@@ -202,7 +202,7 @@
           "raw": "{\n  \"fromWalletId\": \"{{senderWalletId}}\",\n  \"toWalletId\": \"{{receiverWalletId}}\",\n  \"amount\": 999999\n}"
         },
         "url": {
-          "raw": "http://localhost:3000/wallets/transfer",
+          "raw": "{{baseUrl}}/wallets/transfer",
           "protocol": "http",
           "host": ["localhost"],
           "port": "3000",
@@ -218,7 +218,7 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:3000/wallets/00000000-0000-0000-0000-000000000000",
+          "raw": "{{baseUrl}}/wallets/00000000-0000-0000-0000-000000000000",
           "protocol": "http",
           "host": ["localhost"],
           "port": "3000",
@@ -243,7 +243,7 @@
           "raw": "{\n  \"fromWalletId\": \"{{walletId}}\",\n  \"toWalletId\": \"{{walletId}}\",\n  \"amount\": 50\n}"
         },
         "url": {
-          "raw": "http://localhost:3000/wallets/transfer",
+          "raw": "{{baseUrl}}/wallets/transfer",
           "protocol": "http",
           "host": ["localhost"],
           "port": "3000",
@@ -268,7 +268,7 @@
           "raw": "{\n  \"fromWalletId\": \"invalid-id\",\n  \"toWalletId\": \"also-invalid\",\n  \"amount\": 50\n}"
         },
         "url": {
-          "raw": "http://localhost:3000/wallets/transfer",
+          "raw": "{{baseUrl}}/wallets/transfer",
           "protocol": "http",
           "host": ["localhost"],
           "port": "3000",
@@ -280,12 +280,7 @@
     }
   ],
   "variable": [
-    {
-      "key": "baseUrl",
-      "value": "http://localhost:3000",
-      "type": "string"
-    },
-    {
+        {
       "key": "walletId",
       "value": "",
       "type": "string"
