@@ -21,9 +21,6 @@
         },
         "url": {
           "raw": "{{baseUrl}}/wallets",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "3000",
           "path": ["wallets"]
         },
         "description": "Creates a new wallet with USD currency and zero balance"
@@ -46,9 +43,6 @@
         },
         "url": {
           "raw": "{{baseUrl}}/wallets/{{walletId}}/fund",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "3000",
           "path": ["wallets", "{{walletId}}", "fund"]
         },
         "description": "Add funds to a wallet. Replace {{walletId}} with actual wallet ID"
@@ -71,9 +65,6 @@
         },
         "url": {
           "raw": "{{baseUrl}}/wallets/{{walletId}}/fund",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "3000",
           "path": ["wallets", "{{walletId}}", "fund"]
         },
         "description": "Fund wallet with idempotency key. Running this twice with the same key will return the same result"
@@ -96,9 +87,6 @@
         },
         "url": {
           "raw": "{{baseUrl}}/wallets/transfer",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "3000",
           "path": ["wallets", "transfer"]
         },
         "description": "Transfer funds from one wallet to another. Replace {{senderWalletId}} and {{receiverWalletId}} with actual wallet IDs"
@@ -121,9 +109,6 @@
         },
         "url": {
           "raw": "{{baseUrl}}/wallets/transfer",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "3000",
           "path": ["wallets", "transfer"]
         },
         "description": "Transfer with idempotency key. Running this twice with the same key will return the same result"
@@ -137,9 +122,6 @@
         "header": [],
         "url": {
           "raw": "{{baseUrl}}/wallets/{{walletId}}",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "3000",
           "path": ["wallets", "{{walletId}}"]
         },
         "description": "Fetch wallet information and transaction history. Replace {{walletId}} with actual wallet ID"
@@ -153,9 +135,6 @@
         "header": [],
         "url": {
           "raw": "{{baseUrl}}/wallets",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "3000",
           "path": ["wallets"]
         },
         "description": "Fetch all wallets (for testing/debugging)"
@@ -178,9 +157,6 @@
         },
         "url": {
           "raw": "{{baseUrl}}/wallets/{{walletId}}/fund",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "3000",
           "path": ["wallets", "{{walletId}}", "fund"]
         },
         "description": "Test error handling: Attempting to fund with negative amount should return 400 Bad Request"
@@ -203,9 +179,6 @@
         },
         "url": {
           "raw": "{{baseUrl}}/wallets/transfer",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "3000",
           "path": ["wallets", "transfer"]
         },
         "description": "Test error handling: Attempting to transfer more than available balance should return 400 Bad Request"
@@ -219,9 +192,6 @@
         "header": [],
         "url": {
           "raw": "{{baseUrl}}/wallets/00000000-0000-0000-0000-000000000000",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "3000",
           "path": ["wallets", "00000000-0000-0000-0000-000000000000"]
         },
         "description": "Test error handling: Attempting to get a non-existent wallet should return 404 Not Found"
@@ -244,9 +214,6 @@
         },
         "url": {
           "raw": "{{baseUrl}}/wallets/transfer",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "3000",
           "path": ["wallets", "transfer"]
         },
         "description": "Test error handling: Attempting to transfer to the same wallet should return 400 Bad Request"
@@ -269,9 +236,6 @@
         },
         "url": {
           "raw": "{{baseUrl}}/wallets/transfer",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "3000",
           "path": ["wallets", "transfer"]
         },
         "description": "Test validation: Invalid UUID format should return 400 Bad Request with validation errors"
