@@ -1,0 +1,299 @@
+{
+  "info": {
+    "name": "Wallet Service API",
+    "description": "Complete API collection for the Wallet Service with all endpoints and test scenarios",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Create Wallet",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"currency\": \"USD\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/wallets",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["wallets"]
+        },
+        "description": "Creates a new wallet with USD currency and zero balance"
+      },
+      "response": []
+    },
+    {
+      "name": "2. Fund Wallet",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"amount\": 100.50\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/wallets/{{walletId}}/fund",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["wallets", "{{walletId}}", "fund"]
+        },
+        "description": "Add funds to a wallet. Replace {{walletId}} with actual wallet ID"
+      },
+      "response": []
+    },
+    {
+      "name": "3. Fund Wallet (with Idempotency)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"amount\": 200.00,\n  \"idempotencyKey\": \"fund-operation-123\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/wallets/{{walletId}}/fund",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["wallets", "{{walletId}}", "fund"]
+        },
+        "description": "Fund wallet with idempotency key. Running this twice with the same key will return the same result"
+      },
+      "response": []
+    },
+    {
+      "name": "4. Transfer Between Wallets",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fromWalletId\": \"{{senderWalletId}}\",\n  \"toWalletId\": \"{{receiverWalletId}}\",\n  \"amount\": 50.00\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/wallets/transfer",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["wallets", "transfer"]
+        },
+        "description": "Transfer funds from one wallet to another. Replace {{senderWalletId}} and {{receiverWalletId}} with actual wallet IDs"
+      },
+      "response": []
+    },
+    {
+      "name": "5. Transfer (with Idempotency)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fromWalletId\": \"{{senderWalletId}}\",\n  \"toWalletId\": \"{{receiverWalletId}}\",\n  \"amount\": 25.00,\n  \"idempotencyKey\": \"transfer-operation-456\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/wallets/transfer",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["wallets", "transfer"]
+        },
+        "description": "Transfer with idempotency key. Running this twice with the same key will return the same result"
+      },
+      "response": []
+    },
+    {
+      "name": "6. Get Wallet Details",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/wallets/{{walletId}}",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["wallets", "{{walletId}}"]
+        },
+        "description": "Fetch wallet information and transaction history. Replace {{walletId}} with actual wallet ID"
+      },
+      "response": []
+    },
+    {
+      "name": "7. Get All Wallets",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/wallets",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["wallets"]
+        },
+        "description": "Fetch all wallets (for testing/debugging)"
+      },
+      "response": []
+    },
+    {
+      "name": "Error: Fund with Negative Amount",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"amount\": -50\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/wallets/{{walletId}}/fund",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["wallets", "{{walletId}}", "fund"]
+        },
+        "description": "Test error handling: Attempting to fund with negative amount should return 400 Bad Request"
+      },
+      "response": []
+    },
+    {
+      "name": "Error: Transfer Insufficient Balance",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fromWalletId\": \"{{senderWalletId}}\",\n  \"toWalletId\": \"{{receiverWalletId}}\",\n  \"amount\": 999999\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/wallets/transfer",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["wallets", "transfer"]
+        },
+        "description": "Test error handling: Attempting to transfer more than available balance should return 400 Bad Request"
+      },
+      "response": []
+    },
+    {
+      "name": "Error: Get Non-existent Wallet",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/wallets/00000000-0000-0000-0000-000000000000",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["wallets", "00000000-0000-0000-0000-000000000000"]
+        },
+        "description": "Test error handling: Attempting to get a non-existent wallet should return 404 Not Found"
+      },
+      "response": []
+    },
+    {
+      "name": "Error: Transfer to Same Wallet",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fromWalletId\": \"{{walletId}}\",\n  \"toWalletId\": \"{{walletId}}\",\n  \"amount\": 50\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/wallets/transfer",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["wallets", "transfer"]
+        },
+        "description": "Test error handling: Attempting to transfer to the same wallet should return 400 Bad Request"
+      },
+      "response": []
+    },
+    {
+      "name": "Error: Invalid Wallet ID Format",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fromWalletId\": \"invalid-id\",\n  \"toWalletId\": \"also-invalid\",\n  \"amount\": 50\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/wallets/transfer",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["wallets", "transfer"]
+        },
+        "description": "Test validation: Invalid UUID format should return 400 Bad Request with validation errors"
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "walletId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "senderWalletId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "receiverWalletId",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
