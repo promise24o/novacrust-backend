@@ -46,6 +46,63 @@ npm run start:prod
 
 The server will start on `http://localhost:3000`
 
+## 🌐 Deployment
+
+### Production URL
+The API is deployed on Render: **https://novacrust-backend.onrender.com**
+
+### Postman Collection
+Import the Postman collection and environments for easy API testing:
+
+1. **Collection**: `Wallet-Service-API.postman_collection.json`
+2. **Local Environment**: `Wallet-Service-Local.postman_environment.json`
+3. **Production Environment**: `Wallet-Service-Production.postman_environment.json`
+
+**To use:**
+- Import all three files into Postman
+- Select the appropriate environment (Local or Production) from the environment dropdown
+- The `{{baseUrl}}` variable will automatically point to the correct server
+
+### GitHub to Postman Sync
+
+To automatically sync Postman collection when pushing to GitHub:
+
+**Option 1: Postman API Integration**
+1. Generate a Postman API key from your Postman account settings
+2. Add GitHub Action to `.github/workflows/sync-postman.yml`:
+```yaml
+name: Sync Postman Collection
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**.postman_collection.json'
+      - '**.postman_environment.json'
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Sync to Postman
+        run: |
+          curl -X PUT \
+            https://api.getpostman.com/collections/$COLLECTION_ID \
+            -H "X-Api-Key: ${{ secrets.POSTMAN_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d @Wallet-Service-API.postman_collection.json
+```
+
+**Option 2: Postman GitHub Integration (Recommended)**
+1. In Postman, go to your workspace
+2. Click "Integrations" → "Browse Integrations"
+3. Select "GitHub" and authenticate
+4. Configure to sync your collection with this repository
+5. Any changes pushed to GitHub will automatically update in Postman
+
+**Option 3: Manual Import**
+- Team members can import the collection directly from the GitHub repository URL
+- Postman supports importing from raw GitHub URLs
+
 ### 4. Run tests
 
 ```bash
